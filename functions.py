@@ -18,10 +18,15 @@ def read_large_file(file_path: str, chunk_size: int):
 """
 
 def count_symb(generator):
+    shift = 0
     for chunk in generator:
         for char in chunk:
+            if char in alf:
+                shift += 1
+                char = char.lower()
             if ord(char) in score_symb:
                 score_symb[ord(char)] += 1
+    score_symb[0] += shift
     return(score_symb)
 #count_symb(read_large_file('voina-i-mir.txt', 1024))
 
@@ -29,10 +34,6 @@ def count_symb(generator):
 Функция по посчёту SHIFT 
 """
 
-def shift_checker(a: str):
-    global shift
-    shift = shift+1
-    return ord(a.lower())
 
 '''
 def shift_count(score_symb: dict):
@@ -42,12 +43,4 @@ def shift_count(score_symb: dict):
         if key in shift_qwerty:
             shift_count_qwerty += score_symb[key]
 '''
-count_symb(read_large_file('d:/Институт/PYTHON/Травов/тест.txt', 1024))
-shift_count_qwerty = 0
-shift_count_ant = 0
-for key in score_symb:
-    if key in shift_qwerty:
-        shift_count_qwerty += score_symb[key]
-print(score_symb)
-print(shift_count_qwerty)
 
