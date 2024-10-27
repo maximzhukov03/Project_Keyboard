@@ -5,7 +5,7 @@ def READ(file):
         text = file.read()
     return text
 
-RightH = {
+RightHANT = {
     'f1': set("хцжчкзф8"),
     'f2': set("уаё6"),
     'f3': set("яеэ4"),
@@ -13,19 +13,37 @@ RightH = {
     'f5': set(" ")
 }
 
-LeftH = {
+LeftHANT = {
     'f1': set("гвц9"),
     'f2': set("пнй7"),
     'f3': set("рсш5"),      
     'f4': set("дтбмл13"),
 }
 
+RightHQWERTY = {
+    'f1': set("щзжёэё,."),
+    'f2': set("дл09"),
+    'f3': set("оь8"),
+    'f4': set("нгтшщ7"),
+    'f5': set(" ")
+}
+
+LeftHQWERTY = {
+    'f1': set("йфя1"),
+    'f2': set("цыч2"),
+    'f3': set("увс3"),      
+    'f4': set("камепр456"),
+}
+
 spec = set(";,?-.:!\"'()\t\n")
 
-LeftHClick = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
-RightHClick = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
+LeftHClickANT = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
+RightHClickANT = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
 
-def CLICK(txt):
+LeftHClickQWERTY = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
+RightHClickQWERTY = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
+
+def CLICK(txt, LeftH, RightH, LeftHClick, RightHClick):
     for i in txt.lower():
         if i in spec:
             continue
@@ -37,30 +55,49 @@ def CLICK(txt):
         for fin, char in RightH.items():
             if i in char:
                 RightHClick[fin] += 1
+    return LeftHClick, RightHClick
 
 text = READ("voina-i-mir.txt")
-CLICK(text)
 
-print("Левая рука:", LeftHClick)
-print("Правая рука:", RightHClick)
+LeftHClickANT, RightHClickANT = CLICK(text, LeftHANT, RightHANT, LeftHClickANT, RightHClickANT)
 
+LeftHClickQWERTY, RightHClickQWERTY = CLICK(text, LeftHQWERTY, RightHQWERTY, LeftHClickQWERTY, RightHClickQWERTY)
 
-fin = ['Миз', 'Безым', 'Сред', 'Указат', 'Пр Больш.']
-LeftHClickGist = [LeftHClick['f1'], LeftHClick['f2'], LeftHClick['f3'], LeftHClick['f4'], LeftHClick['f5']]
-RightHClickGist = [RightHClick['f1'], RightHClick['f2'], RightHClick['f3'], RightHClick['f4'], RightHClick['f5']]
+print(LeftHClickANT, "\n" ,RightHClickANT)
+print(LeftHClickQWERTY, "\n" ,RightHClickQWERTY)
 
+fin = ['Левый\nМизинец', 'Левый\nБезымянный', 'Левый\nСредний', 'Левый\nУказательный', 'Левый\nБольшой', 
+       'Правый\nБольшой', 'Правый\nУказательный', 'Правый\nСредний', 'Правый\nБезымянный', 'Правый\nМизинец']
+
+LeftHClickGistANT_QWERTY = [
+    LeftHClickANT['f1'], LeftHClickANT['f2'],
+    LeftHClickANT['f3'], LeftHClickANT['f4'], 
+    LeftHClickANT['f5'], 
+    RightHClickANT['f5'], RightHClickANT['f4'], 
+    RightHClickANT['f3'], RightHClickANT['f2'], 
+    RightHClickANT['f1']
+]
+
+RightHClickGistANT_QWERTY = [
+    LeftHClickQWERTY['f1'], LeftHClickQWERTY['f2'], 
+    LeftHClickQWERTY['f3'], LeftHClickQWERTY['f4'], 
+    LeftHClickQWERTY['f5'], 
+    RightHClickQWERTY['f5'], RightHClickQWERTY['f4'], 
+    RightHClickQWERTY['f3'], RightHClickQWERTY['f2'], 
+    RightHClickQWERTY['f1']
+]
 
 fig, os = plt.subplots(figsize=(10, 6))
 BAR_width = 0.4
 index = range(len(fin))
 
 
-os.bar(index, LeftHClickGist, BAR_width, label='Левая рука', color='red')
-os.bar([i + BAR_width for i in index], RightHClickGist, BAR_width, label='Правая рука', color='blue')
+os.bar(index, LeftHClickGistANT_QWERTY, BAR_width, label='ANT', color='red')
+os.bar([i + BAR_width for i in index], RightHClickGistANT_QWERTY, BAR_width, label='QWERTY', color='blue')
 
 os.set_xlabel('Пальцы')
 os.set_ylabel('Кол. нажатий')
-os.set_title('Распределение кликов по пальцам для левой и правой рук (Раскладка ANT)')
+os.set_title('Распределение кликов по пальцам для левой и правой рук')
 os.set_xticks([i + BAR_width / 2 for i in index])
 os.set_xticklabels(fin)
 os.legend()
