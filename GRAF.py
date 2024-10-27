@@ -1,10 +1,5 @@
 import matplotlib.pyplot as plt
 
-def READ(file):
-    with open(file, "r", encoding="utf-8") as file:
-        text = file.read()
-    return text
-
 RightHANT = {
     'f1': set("хцжчкзф8"),
     'f2': set("уаё6"),
@@ -43,6 +38,12 @@ RightHClickANT = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
 LeftHClickQWERTY = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
 RightHClickQWERTY = {'f1': 0, 'f2': 0, 'f3': 0, 'f4': 0, 'f5': 0}
 
+def READ(file):
+    with open(file, "r", encoding="utf-8") as file:
+        text = file.read()
+
+    return text
+    
 def CLICK(txt, LeftH, RightH, LeftHClick, RightHClick):
     for i in txt.lower():
         if i in spec:
@@ -57,17 +58,30 @@ def CLICK(txt, LeftH, RightH, LeftHClick, RightHClick):
                 RightHClick[fin] += 1
     return LeftHClick, RightHClick
 
+def GRAF(LeftHClickGistANT_QWERTY, RightHClickGistANT_QWERTY):
+    fin = ['Левый\nМизинец', 'Левый\nБезымянный', 'Левый\nСредний', 'Левый\nУказательный', 'Левый\nБольшой', 
+       'Правый\nБольшой', 'Правый\nУказательный', 'Правый\nСредний', 'Правый\nБезымянный', 'Правый\nМизинец']
+    fig, os = plt.subplots(figsize=(10, 6))
+    BAR_width = 0.4
+    index = range(len(fin))
+    os.bar(index, LeftHClickGistANT_QWERTY, BAR_width, label='ANT', color='red')
+    os.bar([i + BAR_width for i in index], RightHClickGistANT_QWERTY, BAR_width, label='QWERTY', color='blue')
+
+    os.set_xlabel('Пальцы')
+    os.set_ylabel('Кол. нажатий')
+    os.set_title('Распределение кликов по пальцам для левой и правой рук')
+    os.set_xticks([i + BAR_width / 2 for i in index])
+    os.set_xticklabels(fin)
+    os.legend()
+
+    plt.tight_layout()
+    plt.show()
+
 text = READ("voina-i-mir.txt")
 
 LeftHClickANT, RightHClickANT = CLICK(text, LeftHANT, RightHANT, LeftHClickANT, RightHClickANT)
 
 LeftHClickQWERTY, RightHClickQWERTY = CLICK(text, LeftHQWERTY, RightHQWERTY, LeftHClickQWERTY, RightHClickQWERTY)
-
-print(LeftHClickANT, "\n" ,RightHClickANT)
-print(LeftHClickQWERTY, "\n" ,RightHClickQWERTY)
-
-fin = ['Левый\nМизинец', 'Левый\nБезымянный', 'Левый\nСредний', 'Левый\nУказательный', 'Левый\nБольшой', 
-       'Правый\nБольшой', 'Правый\nУказательный', 'Правый\nСредний', 'Правый\nБезымянный', 'Правый\nМизинец']
 
 LeftHClickGistANT_QWERTY = [
     LeftHClickANT['f1'], LeftHClickANT['f2'],
@@ -87,20 +101,4 @@ RightHClickGistANT_QWERTY = [
     RightHClickQWERTY['f1']
 ]
 
-fig, os = plt.subplots(figsize=(10, 6))
-BAR_width = 0.4
-index = range(len(fin))
-
-
-os.bar(index, LeftHClickGistANT_QWERTY, BAR_width, label='ANT', color='red')
-os.bar([i + BAR_width for i in index], RightHClickGistANT_QWERTY, BAR_width, label='QWERTY', color='blue')
-
-os.set_xlabel('Пальцы')
-os.set_ylabel('Кол. нажатий')
-os.set_title('Распределение кликов по пальцам для левой и правой рук')
-os.set_xticks([i + BAR_width / 2 for i in index])
-os.set_xticklabels(fin)
-os.legend()
-
-plt.tight_layout()
-plt.show()
+GRAF(LeftHClickGistANT_QWERTY, RightHClickGistANT_QWERTY)
