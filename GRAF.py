@@ -60,7 +60,7 @@ os.bar([i + BAR_width for i in index], RightHClickGist, BAR_width, label='Пра
 
 os.set_xlabel('Пальцы')
 os.set_ylabel('Кол. нажатий')
-os.set_title('Распределение кликов по пальцам для левой и правой рук (Раскладка ANT)')
+os.set_title('Распределение кликов по пальцам для левой и правой рук (Раскладка QWERTY)')
 os.set_xticks([i + BAR_width / 2 for i in index])
 os.set_xticklabels(fin)
 os.legend()
