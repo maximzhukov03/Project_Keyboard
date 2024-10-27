@@ -28,19 +28,3 @@ def count_symb(generator):
                 score_symb[ord(char)] += 1
     score_symb[0] += shift
     return(score_symb)
-#count_symb(read_large_file('voina-i-mir.txt', 1024))
-
-"""
-Функция по посчёту SHIFT 
-"""
-
-
-'''
-def shift_count(score_symb: dict):
-    shift_count_qwerty = 0
-    shift_count_ant = 0
-    for key in score_symb:
-        if key in shift_qwerty:
-            shift_count_qwerty += score_symb[key]
-'''
-
