@@ -1,9 +1,4 @@
-from ANT import *
-from QWERTY import *
-from SCORE_SYMB import *
-from MAIN_DICT import *
-from SHIFT_SETS import *
-from FING_COUNT import *
+from dicts import *
 
 """
 Генераторная функция, обрабатывающая текст по кускам 
