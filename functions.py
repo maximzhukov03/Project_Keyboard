@@ -51,4 +51,3 @@ for key in score_symb:
 print(score_symb)
 print(shift_count_qwerty)
 
-def finger_count()
