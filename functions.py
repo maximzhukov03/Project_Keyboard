@@ -39,8 +39,7 @@ def dop_shift(set_shift:set,symbol_strees:dict):
         shift+=symbol_strees[sym]
     return shift
 
-key_stress_ant= dict.fromkeys(ant.values(),0)
-key_stress_qwer= dict.fromkeys(qwerty.values(),0)
+
 
 def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
     for symb in stress_sumbol.keys():
@@ -51,6 +50,5 @@ def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
 def finger_stress_counter(fin_count:dict,key_stress:dict,main_dict:frozendict):
     for finger in fin_count.keys():
        for fingerkeys in main_dict[finger].keys():
-           print(fingerkeys)
            fin_count[finger] += key_stress[fingerkeys]
     return fin_count
