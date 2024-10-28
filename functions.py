@@ -47,8 +47,12 @@ def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
     key_stress["42"]+=shift
     return key_stress 
 
-def finger_stress_counter(fin_count:dict,key_stress:dict,main_dict:frozendict):
+def finger_stress_counter(fin_count:dict,key_stress:dict,main_dict:frozendict,check:bool):
     for finger in fin_count.keys():
        for fingerkeys in main_dict[finger].keys():
-           fin_count[finger] += key_stress[fingerkeys]
+           if check:
+               shtraf=(main_dict[finger][fingerkeys]+1)*check
+           else:
+               shtraf=1
+           fin_count[finger] += key_stress[fingerkeys]*shtraf
     return fin_count
