@@ -14,7 +14,7 @@ def GRAF(ClickANT, Click_QWERTY):
     BAR_width = 0.4
     index = range(len(FingLable))
     os.barh(index, left_clicks, BAR_width, label='ANT', color='red')
-    os.barh([i + BAR_width for i in index], right_clicks, BAR_width, label='QWERTY', color='blue')
+    os.barh([i + BAR_width for i in index], right_clicks, BAR_width, label='ЙЦУКЕН', color='blue')
     os.set_ylabel('Пальцы')
     os.set_xlabel('Кол. нажатий')
     os.set_title('Распределение кликов по пальцам для левой и правой рук')
