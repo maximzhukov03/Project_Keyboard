@@ -2,7 +2,6 @@ from frozendict import frozendict
 
 import dicts
 from dicts import *
-from dicts import gramset
 
 def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
     '''
@@ -140,6 +139,8 @@ def codesymbols_from_strF(generator):
         chunk = chunk.splitlines()
         for str in chunk:
             strStrip = str.strip()
+            if not strStrip:
+                continue
             gramlist.append([ord(elem) for elem in strStrip])
     return gramlist
 
