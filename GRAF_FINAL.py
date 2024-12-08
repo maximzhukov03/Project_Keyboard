@@ -44,7 +44,7 @@ def GRAF(ClickANT=None, Click_QWERTY=None, grams_ant=None, grams_qwerty=None):
     gram_keys = ['R_Gram_2', 'L_Gram_2', 'QL_Gram_2', 'QR_Gram_2']
     gram_values = [grams_ant.get(key, 0) for key in gram_keys]
     # Для названия столбцов диаграмм (Нижних)
-    labels = ['Правая\nрука', 'Левая\nрука', 'Удобная для дрочки\nлевая', 'Удобная для дрочки\nправая']
+    labels = ['Правая\nрука', 'Левая\nрука', 'Удобная\nлевая', 'Удобная\nправая']
     
     bars = ax2.bar(labels, gram_values, color=['red', 'blue', 'green', 'orange'])
     ax2.bar_label(bars, label_type='center', color='white', fontsize=16)
