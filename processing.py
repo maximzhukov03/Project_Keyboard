@@ -75,7 +75,7 @@ def key_quality(gramlist_key, arm: str):
             f4 = set(main_dict["fi4r"].keys())
             f3 = set(main_dict["fi3r"].keys())
             f2 = set(main_dict["fi2r"].keys())
-            fi=[f2,f3,f4,f5]
+            fi = [f2, f3, f4, f5]
             for el in fi:
                 if gramlist_key[0] in el and gramlist_key[1] in el:
                     return False
@@ -121,10 +121,10 @@ def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
         gramlist_key = [layout[x] for x in graminnerlist]
 
         if (gramlist_key <= left):
-            Gram_counter["LGram"+"_"+str(gramlen)] += 1
+            Gram_counter["L_Gram"+"_"+str(gramlen)] += 1
 
         if (gramlist_key <= right):
-            Gram_counter["RGram2"+"_"+str(gramlen)] += 1
+            Gram_counter["R_Gram2"+"_"+str(gramlen)] += 1
 
     return Gram_counter
 
@@ -139,3 +139,4 @@ def codesymbols_from_strF(generator):
             strStrip = str.strip()
             gramlist.append([ord(elem) for elem in strStrip])
     return gramlist
+
