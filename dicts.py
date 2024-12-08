@@ -358,8 +358,8 @@ allalf = {1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083
 
 #данныйе для подсчёта 2-х и 3-х буквенных сочетаний 
 
-right =set(main_dict["fi5r"].keys()) | set(main_dict["fi4r"].keys()) | set(main_dict["fi3r"].keys()) | set(main_dict["fi2r"].keys())
-left =set(main_dict["fi5l"].keys()) | set(main_dict["fi4l"].keys()) | set(main_dict["fi3l"].keys()) | set(main_dict["fi2l"].keys())
+right = list(set(main_dict["fi5r"].keys()) | set(main_dict["fi4r"].keys()) | set(main_dict["fi3r"].keys()) | set(main_dict["fi2r"].keys()))
+left = list((main_dict["fi5l"].keys()) | set(main_dict["fi4l"].keys()) | set(main_dict["fi3l"].keys()) | set(main_dict["fi2l"].keys()))
 
 
 LArmSetQwer = frozenset("ёЁ1!2\"3№4;5%йЙцЦуУкКеЕфФыЫвВаАпПяЯчЧсСмМиИ")
