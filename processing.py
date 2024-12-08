@@ -1,6 +1,8 @@
 from frozendict import frozendict
-from dicts import *
 
+import dicts
+from dicts import *
+from dicts import gramset
 
 def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
     '''
@@ -62,44 +64,78 @@ def finger_stress_counter(fin_count:dict,key_stress:dict,main_dict:frozendict,ch
            fin_count[finger] += key_stress[fingerkeys]*shtraf
     return fin_count
 
-#подсчёт 2-х буквенных сочетаний
-def gram_hend_2(str):
-    if all(char in RArmSetQwer for char in str):
-        Gram_count["RGram2Qwert"] += 1
 
-    if all(char in LArmSetQwer for char in str):
-        Gram_count["LGram2Qwert"] += 1
+#подсчёт буквенных сочетаний
 
-    if all(char in RArmSetAnt for char in str):
-        Gram_count["RGram2Ant"] += 1     
 
-    if all(char in LArmSetAnt for char in str):
-        Gram_count["LGram2Ant"] += 1
-    return Gram_count
-#подсчёт 3-х буквенных сочетаний
-def gram_hend_3(str):
-    if all(char in RArmSetQwer for char in str):
-        Gram_count["RGram3Qwert"] += 1
+def key_quality(gramlist_key, arm: str):
+    match arm:
+        case "R": #2-5
+            f5 = set(main_dict["fi5r"].keys())
+            f4 = set(main_dict["fi4r"].keys())
+            f3 = set(main_dict["fi3r"].keys())
+            f2 = set(main_dict["fi2r"].keys())
+            fi=[f2,f3,f4,f5]
+            for el in fi:
+                if gramlist_key[0] in el and gramlist_key[1] in el:
+                    return False
+            if gramlist_key[0] in f5:
+                return False
+            if gramlist_key[0] in f2:
+                return True
+            if gramlist_key[1] in f5:
+                return True
+            if gramlist_key[1] in f2:
+                return False
+            if gramlist_key[0] in f3:
+                return True
+            else:
+                return False
+        case "L": #5-2
+            f5 = set(main_dict["fi5l"].keys())
+            f4 = set(main_dict["fi4l"].keys())
+            f3 = set(main_dict["fi3l"].keys())
+            f2 = set(main_dict["fi2l"].keys())
+            fi = [f2, f3, f4, f5]
+            for el in fi:
+                if gramlist_key[0] in el and gramlist_key[1] in el:
+                    return False
+            if gramlist_key[0] in f2:
+                return False
+            if gramlist_key[0] in f5:
+                return True
+            if gramlist_key[1] in f2:
+                return True
+            if gramlist_key[1] in f5:
+                return False
+            if gramlist_key[0] in f4:
+                return True
+            else:
+                return False
 
-    if all(char in LArmSetQwer for char in str):
-        Gram_count["LGram3Qwert"] += 1
+def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
+    Gram_len = [x+"_"+str(gramlen) for x in gramnameset]
+    Gram_counter=dict.fromkeys(Gram_len,0)
+    for graminnerlist in gramlist:
 
-    if all(char in RArmSetAnt for char in str):
-        Gram_count["RGram3Ant"] += 1     
+        gramlist_key = [layout[x] for x in graminnerlist]
 
-    if all(char in LArmSetAnt for char in str):
-        Gram_count["LGram3Ant"] += 1
-    return Gram_count
+        if (gramlist_key <= left):
+            Gram_counter["LGram"+"_"+str(gramlen)] += 1
+
+        if (gramlist_key <= right):
+            Gram_counter["RGram2"+"_"+str(gramlen)] += 1
+
+    return Gram_counter
+
+
+
 #общий счётчик сочетаний 
-def count_grams(generator):
+def codesymbols_from_strF(generator):
+    gramlist=[]
     for chunk in generator:
         chunk = chunk.splitlines()
         for str in chunk:
             strStrip = str.strip()
-            match len(strStrip):
-                case 2:
-                    gram_hend_2(strStrip)
-                case 3:
-                    gram_hend_3(strStrip)
-                case _:
-                    pass
+            gramlist.append([ord(elem) for elem in strStrip])
+    return gramlist

@@ -217,19 +217,15 @@ allalf = {1072, 1073, 1074, 1075, 1076, 1077, 1078, 1079, 1080, 1081, 1082, 1083
 
 #данныйе для подсчёта 2-х и 3-х буквенных сочетаний 
 
+right =set(main_dict["fi5r"].keys()) | set(main_dict["fi4r"].keys()) | set(main_dict["fi3r"].keys()) | set(main_dict["fi2r"].keys())
+left =set(main_dict["fi5l"].keys()) | set(main_dict["fi4l"].keys()) | set(main_dict["fi3l"].keys()) | set(main_dict["fi2l"].keys())
+
+
 LArmSetQwer = frozenset("ёЁ1!2\"3№4;5%йЙцЦуУкКеЕфФыЫвВаАпПяЯчЧсСмМиИ")
 RArmSetQwer = frozenset("6:7?8*9()0-_=+нНгГшШщЩзЗхХъЪрРоОлЛдДжЖэЭ\/тТьЬбБюЮ.,")
 
 LArmSetAnt = frozenset("\_!9?7`5\"3=1гГпПрРдДмМвВнНсСтТлЛщЩйЙшШбБ,;")
 RArmSetAnt = frozenset("+0-2*4/6%8()<>ыЫиИяЯуУхХцЦжЖчЧьЬъЪоОеЕаАкКзЗ.:юЮэЭёЁфФ")
 
-Gram_count = {
-    "RGram2Qwert": 0,
-    "LGram2Qwert": 0,
-    "RGram2Ant": 0,
-    "LGram2Ant": 0,
-    "RGram3Qwert": 0,
-    "LGram3Qwert": 0,
-    "RGram3Ant": 0,
-    "LGram3Ant": 0,
-}
+gramnameset = {"R_Gram", "L_Gram", "QR_Gram", "QL_Gram"}
+#gram=[x+"QWERTY" for x in gramset] s
