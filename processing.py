@@ -67,50 +67,39 @@ def finger_stress_counter(fin_count:dict,key_stress:dict,main_dict:frozendict,ch
 #подсчёт буквенных сочетаний
 
 
-def key_quality(gramlist_key, arm: str):
+def key_quality(gramlist_key, arm: str,gramlen:int):
     match arm:
         case "R": #2-5
             f5 = set(main_dict["fi5r"].keys())
             f4 = set(main_dict["fi4r"].keys())
             f3 = set(main_dict["fi3r"].keys())
             f2 = set(main_dict["fi2r"].keys())
-            fi = [f2, f3, f4, f5]
-            for el in fi:
-                if gramlist_key[0] in el and gramlist_key[1] in el:
-                    return False
-            if gramlist_key[0] in f5:
-                return False
-            if gramlist_key[0] in f2:
-                return True
-            if gramlist_key[1] in f5:
-                return True
-            if gramlist_key[1] in f2:
-                return False
-            if gramlist_key[0] in f3:
-                return True
-            else:
-                return False
+            fi = [f5, f4, f3, f2]
         case "L": #5-2
             f5 = set(main_dict["fi5l"].keys())
             f4 = set(main_dict["fi4l"].keys())
             f3 = set(main_dict["fi3l"].keys())
             f2 = set(main_dict["fi2l"].keys())
-            fi = [f2, f3, f4, f5]
-            for el in fi:
-                if gramlist_key[0] in el and gramlist_key[1] in el:
-                    return False
-            if gramlist_key[0] in f2:
-                return False
-            if gramlist_key[0] in f5:
+            fi = [f5, f4, f3, f2]
+    flag = 0
+    print(gramlist_key)
+    for el in gramlist_key:
+        for _ in fi:
+            if flag == gramlen:
                 return True
-            if gramlist_key[1] in f2:
-                return True
-            if gramlist_key[1] in f5:
-                return False
-            if gramlist_key[0] in f4:
-                return True
+            print(fi[0])
+            if el in fi[0]:
+                print("true")
+                flag += 1
+                fi.pop(0)
+                break
             else:
-                return False
+                print("not in", el)
+                fi.pop(0)
+    if flag == gramlen:
+        return True
+    else:
+        return False
 
 def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
     Gram_len = [x+"_"+str(gramlen) for x in gramnameset]
@@ -121,11 +110,11 @@ def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
 
         if all(el in left for el in gramlist_key):
             Gram_counter["L_Gram"+"_"+str(gramlen)] += 1
-            if key_quality(gramlist_key, 'L'):
+            if key_quality(gramlist_key, 'L',gramlen):
                 Gram_counter["QL_Gram"+"_"+str(gramlen)] +=1
-        if all(el in right for el in gramlist_key):
+        if all(el in right for el in gramlist_key,):
             Gram_counter["R_Gram2"+"_"+str(gramlen)] += 1
-            if key_quality(gramlist_key, 'R'):
+            if key_quality(gramlist_key, 'R',gramlen):
                 Gram_counter["QR_Gram" + "_" + str(gramlen)] += 1
 
     return Gram_counter
