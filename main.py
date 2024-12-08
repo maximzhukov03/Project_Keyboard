@@ -31,10 +31,13 @@ fin_count_ant = (finger_stress_counter(fin_count_ant, key_stress_ant, main_dict,
 
 
 # Подсчёт буквенных сочетаний
-count_grams(read_large_file('grams.txt', 1024))
-print(Gram_count)
+gramlist = codesymbols_from_strF(read_large_file("grams.txt", 2024))
+#print(gramlist)
+grams_friq_qwer = gram_hendler(gramlist,qwerty,2)
+grams_friq_ant = gram_hendler(gramlist,ant,2)
+#print(grams_friq)
 # Вывод графики
-GRAF(fin_count_ant, fin_count_qwer)
+GRAF(fin_count_ant, fin_count_qwer, grams_friq_ant,grams_friq_qwer)
 
 
 

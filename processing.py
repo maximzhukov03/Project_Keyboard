@@ -112,8 +112,8 @@ def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
             Gram_counter["L_Gram"+"_"+str(gramlen)] += 1
             if key_quality(gramlist_key, 'L',gramlen):
                 Gram_counter["QL_Gram"+"_"+str(gramlen)] +=1
-        if all(el in right for el in gramlist_key,):
-            Gram_counter["R_Gram2"+"_"+str(gramlen)] += 1
+        if all(el in right for el in gramlist_key):
+            Gram_counter["R_Gram"+"_"+str(gramlen)] += 1
             if key_quality(gramlist_key, 'R',gramlen):
                 Gram_counter["QR_Gram" + "_" + str(gramlen)] += 1
 
