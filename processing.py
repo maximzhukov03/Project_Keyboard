@@ -4,7 +4,8 @@ import dicts
 from dicts import *
 
 
-def key_stress_counter(key_stress: dict, stress_sumbol: dict, rascl: dict, shift: int, alt: int):
+def key_stress_counter(key_stress: dict, stress_sumbol: dict,
+                       rascl: dict, shift: int, alt: int):
     """
     Функция подсчета нагрузки клавиш.
 
@@ -16,8 +17,8 @@ def key_stress_counter(key_stress: dict, stress_sumbol: dict, rascl: dict, shift
     key_stress (dict): Словарь, в который будут добавлены значения нагрузки.
                        Ключи — это код клавиши, а значения —
                        соответствующие суммы нагрузки (int).
-    stress_sumbol (dict): Словарь, где ключами являются коды символов, а значениями —
-                          их количество (int).
+    stress_sumbol (dict): Словарь, где ключами являются коды символов,
+    а значениями — их количество (int).
     rascl (dict): Словарь, который сопоставляет символы из stress_sumbol
                   с идентификаторами в key_stress.
     shift (int): Дополнительное значение, которое будет добавлено к ключу "42"
@@ -33,7 +34,8 @@ def key_stress_counter(key_stress: dict, stress_sumbol: dict, rascl: dict, shift
     return key_stress
 
 
-def finger_stress_counter(fin_count: dict,key_stress: dict, main_dict: frozendict, check: bool):
+def finger_stress_counter(fin_count: dict, key_stress: dict,
+                          main_dict: frozendict, check: bool):
     """
     Подсчёт нагрузки для каждого пальца.
 
@@ -57,12 +59,12 @@ def finger_stress_counter(fin_count: dict,key_stress: dict, main_dict: frozendic
     dict: Обновлённый словарь fin_count с добавленными значениями нагрузки
     """
     for finger in fin_count.keys():
-       for fingerkeys in main_dict[finger].keys():
-           if check:
-               shtraf=(main_dict[finger][fingerkeys] + 1) * check
-           else:
-               shtraf = 1
-           fin_count[finger] += key_stress[fingerkeys] * shtraf
+        for fingerkeys in main_dict[finger].keys():
+            if check:
+                shtraf = (main_dict[finger][fingerkeys] + 1) * check
+            else:
+                shtraf = 1
+            fin_count[finger] += key_stress[fingerkeys] * shtraf
     return fin_count
 
 
@@ -118,6 +120,7 @@ def key_quality(gramlist_key, arm: str, gramlen: int):
         return True
     else:
         return False
+
 
 def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
     """
@@ -268,10 +271,10 @@ def put_altlet(alf: dict, alt_set: set):
     for key in keys_to_iterate:
         if key in main_dict:
             for sub_key, _ in main_dict[key].items():
-                #print(sub_key)
+                # print(sub_key)
                 list_buttons.append(sub_key)
     index = 0
-    #qwerty1 = {}
+    # qwerty1 = {}
     for let in alt_set:
         alf[let] = str(list_buttons[index])
         index += 1
@@ -280,3 +283,4 @@ def put_altlet(alf: dict, alt_set: set):
     alf[0] = "42"
     alf[-1] = "100"
     return alf
+    
