@@ -149,7 +149,7 @@ def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
           - "QR_Gram_<gramlen>": количество удобных грамматических
             последовательностей для правой руки.
     """
-    Gram_len = [x + "_" + str(gramlen) for x in gramnameset]
+    Gram_len = [x + "_"  for x in gramnameset]
     Gram_counter = dict.fromkeys(Gram_len, 0)
     for graminnerlist in gramlist:
 
@@ -191,7 +191,8 @@ def codesymbols_from_strF(generator):
             strStrip = str.strip()
             if not strStrip:
                 continue
-            gramlist.append([ord(elem) for elem in strStrip])
+            strStrip = strStrip.lower()
+            gramlist.append([ord(elem) for elem in strStrip if ord(elem) in all_symb])
     return gramlist
 
 
