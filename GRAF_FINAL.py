@@ -100,9 +100,9 @@ def plot_grams_ant(grams_ant=None, name1=None, save_path=f"grams_ant.png"):
 
     # Проверка на None если вдруг входные данные отсутствуют
     if grams_ant is None:
-        grams_ant = {'R_Gram_2': 0, 'L_Gram_2': 0, 'QL_Gram_2': 0, 'QR_Gram_2': 0}
+        grams_ant = {'R_Gram_': 0, 'L_Gram_': 0, 'QL_Gram_': 0, 'QR_Gram_': 0}
 
-    gram_keys = ['R_Gram_2', 'L_Gram_2', 'QL_Gram_2', 'QR_Gram_2']
+    gram_keys = ['R_Gram_', 'L_Gram_', 'QL_Gram_', 'QR_Gram_']
     gram_values = [grams_ant.get(key, 0) for key in gram_keys]
     
     labels = ['Правая\nрука', 'Левая\nрука', 'Удобная\nлевая', 'Удобная\nправая']
@@ -122,9 +122,9 @@ def plot_grams_qwerty(grams_qwerty=None, name2=None):
 
     # Проверка на None если вдруг входные данные отсутствуют
     if grams_qwerty is None:
-        grams_qwerty = {'R_Gram_2': 0, 'L_Gram_2': 0, 'QL_Gram_2': 0, 'QR_Gram_2': 0}
+        grams_qwerty = {'R_Gram_': 0, 'L_Gram_': 0, 'QL_Gram_': 0, 'QR_Gram_': 0}
 
-    gram_keys = ['R_Gram_2', 'L_Gram_2', 'QL_Gram_2', 'QR_Gram_2']
+    gram_keys = ['R_Gram_', 'L_Gram_', 'QL_Gram_', 'QR_Gram_']
     gram_values = [grams_qwerty.get(key, 0) for key in gram_keys]
     
     labels = ['Правая\nрука', 'Левая\nрука', 'Удобная\nлевая', 'Удобная\nправая']
