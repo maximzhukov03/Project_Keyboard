@@ -85,11 +85,11 @@ fin_count_second = (finger_stress_counter(second_fin_count, key_stress_second, m
 
 
 # Подсчёт буквенных сочетаний
-gramlist = codesymbols_from_strF(read_large_file("grams.txt", 2024))
-#gramlist = gram_drobl(gramlist,)
+gramlist = codesymbols_from_strF(read_large_file("1grams-3.txt", 2024))
+gramlist = gram_drobl(gramlist, 3)
 #print(gramlist)
-grams_friq_first = gram_hendler(gramlist, first_dict_raskl, 2)
-grams_friq_second = gram_hendler(gramlist, second_dict_raskl, 2)
+grams_friq_first = gram_hendler(gramlist, first_dict_raskl, 3)
+grams_friq_second = gram_hendler(gramlist, second_dict_raskl, 3)
 #print(grams_friq)
 # Вывод графики
 GRAF(fin_count_second, fin_count_first, grams_friq_second, grams_friq_first)
