@@ -121,8 +121,7 @@ def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
     return Gram_counter
 
 
-
-#общий счётчик сочетаний 
+#общий счётчик сочетаний
 def codesymbols_from_strF(generator):
     gramlist=[]
     for chunk in generator:
@@ -133,6 +132,7 @@ def codesymbols_from_strF(generator):
                 continue
             gramlist.append([ord(elem) for elem in strStrip])
     return gramlist
+
 
 def gram_drobl(word_list:list,gramlen:int):
     gram_list = []
@@ -145,3 +145,22 @@ def gram_drobl(word_list:list,gramlen:int):
                 gram = [gram[1]]
     return gram_list
 
+def get_extra_let(alf:dict, service_symb:set):
+    alt_set = [symbol for symbol in service_symb if symbol not in alf.keys()]
+    return alt_set
+def put_altlet(alf:dict, alt_set:set):
+    keys_to_iterate = ["fi4l", "fi3l", "fi3r", "fi4r"]
+    list_buttons = []
+    for key in keys_to_iterate:
+        if key in main_dict:
+            for sub_key, _ in main_dict[key].items():
+                print(sub_key)
+                list_buttons.append(sub_key)
+    index = 0
+    #qwerty1 = {}
+    for let in alt_set:
+        alf[let] = str(list_buttons[index])
+        index += 1
+        if index == len(list_buttons):
+            index = 0
+    return alf
