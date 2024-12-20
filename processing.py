@@ -155,14 +155,14 @@ def gram_hendler(gramlist: list, layout: frozendict, gramlen: int):
 
         gramlist_key = [layout[x] for x in graminnerlist]
 
-        if all(el in left for el in gramlist_key):
-            Gram_counter["L_Gram" + "_" + str(gramlen)] += 1
+         if all(el in left for el in gramlist_key):
+            Gram_counter["L_Gram" + "_" ] += 1
             if key_quality(gramlist_key, 'L', gramlen):
-                Gram_counter["QL_Gram" + "_" + str(gramlen)] += 1
+                Gram_counter["QL_Gram" + "_" ] += 1
         if all(el in right for el in gramlist_key):
-            Gram_counter["R_Gram" + "_" + str(gramlen)] += 1
+            Gram_counter["R_Gram" + "_" ] += 1
             if key_quality(gramlist_key, 'R', gramlen):
-                Gram_counter["QR_Gram" + "_" + str(gramlen)] += 1
+                Gram_counter["QR_Gram" + "_" ] += 1
 
     return Gram_counter
 
@@ -216,12 +216,13 @@ def gram_drobl(word_list: list, gramlen: int):
     """
     gram_list = []
     for word in word_list:
-        gram = []
+        gram = list()
         for elem in word:
             gram.append(elem)
             if len(gram) == gramlen:
-                gram_list.append(gram)
-                gram = [gram[1]]
+                tgram = gram
+                gram_list.append(tgram)
+                gram = gram[1:gramlen-1]
     return gram_list
 
 
