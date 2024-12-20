@@ -3,7 +3,7 @@ from frozendict import frozendict
 import dicts
 from dicts import *
 
-def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
+def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int,alt:int):
     '''
     Функция подсчета нагрузки клавиш.
 
@@ -28,6 +28,7 @@ def key_stress_counter(key_stress:dict,stress_sumbol:dict,rascl:dict,shift:int):
     for symb in stress_sumbol.keys():
         key_stress[rascl[symb]]+=stress_sumbol[symb]
     key_stress["42"]+=shift
+    key_stress["100"]+=alt
     return key_stress 
 
 
@@ -132,4 +133,15 @@ def codesymbols_from_strF(generator):
                 continue
             gramlist.append([ord(elem) for elem in strStrip])
     return gramlist
+
+def gram_drobl(word_list:list,gramlen:int):
+    gram_list = []
+    for word in word_list:
+        gram = []
+        for elem in word:
+            gram.append(elem)
+            if len(gram) == gramlen:
+                gram_list.append(gram)
+                gram = [gram[1]]
+    return gram_list
 

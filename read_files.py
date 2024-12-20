@@ -52,7 +52,7 @@ def count_symb(generator):
     return(score_symb)
 
 
-def dop_shift(set_shift:set,symbol_strees:dict):
+def dop_shift(set_shift: set, symbol_strees: dict):
     """
     Подсчёт шифтов для уникальных символов.
 
@@ -73,4 +73,27 @@ def dop_shift(set_shift:set,symbol_strees:dict):
     for sym in set_shift:
         shift+=symbol_strees[sym]
     return shift
+
+
+def dop_alt(set_alt: set, symbol_strees: dict):
+    """
+    Подсчёт aльтов для уникальных символов.
+
+    Эта функция принимает множество уникальных символов и словарь,
+    в котором хранятся значения для каждого символа.
+    Она возвращает сумму альтов для всех символов из множества.
+
+    Параметры:
+    set_alt (set): Множество уникальных символов, для которых необходимо
+                     подсчитать альт.
+    symbol_strees (dict): Словарь, где ключами являются коды символов,
+                          а значениями — соответствующие значения альтов (int).
+
+    Возвращает:
+    shift (int): Сумма шифтов для всех уникальных символов из set_shift.
+    """
+    alt = 0
+    for sym in set_alt:
+        alt+=symbol_strees[sym]
+    return alt
 
