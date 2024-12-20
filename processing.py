@@ -83,19 +83,19 @@ def key_quality(gramlist_key, arm: str,gramlen:int):
             f2 = set(main_dict["fi2l"].keys())
             fi = [f5, f4, f3, f2]
     flag = 0
-    print(gramlist_key)
+    #print(gramlist_key)
     for el in gramlist_key:
         for _ in fi:
             if flag == gramlen:
                 return True
-            print(fi[0])
+          #  print(fi[0])
             if el in fi[0]:
-                print("true")
+             #   print("true")
                 flag += 1
                 fi.pop(0)
                 break
             else:
-                print("not in", el)
+            #    print("not in", el)
                 fi.pop(0)
     if flag == gramlen:
         return True
@@ -154,7 +154,7 @@ def put_altlet(alf:dict, alt_set:set):
     for key in keys_to_iterate:
         if key in main_dict:
             for sub_key, _ in main_dict[key].items():
-                print(sub_key)
+                #print(sub_key)
                 list_buttons.append(sub_key)
     index = 0
     #qwerty1 = {}
@@ -163,4 +163,6 @@ def put_altlet(alf:dict, alt_set:set):
         index += 1
         if index == len(list_buttons):
             index = 0
+    alf[0] = "42"
+    alf[-1] = "100"
     return alf

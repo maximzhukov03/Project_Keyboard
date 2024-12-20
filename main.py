@@ -56,6 +56,7 @@ match current[1]:
         second_dict_raskl = put_altlet(zub, second_alt_set)
         second_fin_count = dict.fromkeys(main_dict.keys(), 0)
 
+
 # Подсчёт символов.
 count_symb(read_large_file('voina-i-mir.txt', 1024))
 
@@ -71,11 +72,11 @@ alt_second = dop_alt(second_alt_set, score_symb)
 key_stress_first = dict.fromkeys(first_dict_raskl.values(), 0)
 key_stress_second = dict.fromkeys(second_dict_raskl.values(), 0)
 # Подсчет нагрузки клавиш для каждой раскладки.
-key_stress_first = (key_stress_counter(key_stress_first, score_symb, first_dict_raskl, shift_first,alt_first))
-key_stress_second = (key_stress_counter(key_stress_second, score_symb, second_dict_raskl, shift_second,alt_second))
+key_stress_first = (key_stress_counter(key_stress_first, score_symb, first_dict_raskl, shift_first, alt_first))
+key_stress_second = (key_stress_counter(key_stress_second, score_symb, second_dict_raskl, shift_second, alt_second))
 
 
-print(score_symb)
+#print(score_symb)
 # Подсчет нагрузки для каждого файла
 fin_count_first = (finger_stress_counter(first_fin_count, key_stress_first, main_dict, True))
 fin_count_second = (finger_stress_counter(second_fin_count, key_stress_second, main_dict, True))
@@ -85,6 +86,7 @@ fin_count_second = (finger_stress_counter(second_fin_count, key_stress_second, m
 
 # Подсчёт буквенных сочетаний
 gramlist = codesymbols_from_strF(read_large_file("grams.txt", 2024))
+#gramlist = gram_drobl(gramlist,)
 #print(gramlist)
 grams_friq_first = gram_hendler(gramlist, first_dict_raskl, 2)
 grams_friq_second = gram_hendler(gramlist, second_dict_raskl, 2)
